@@ -35,7 +35,6 @@ private List<User> getUserList(){
     return user;
     }
     @RequestMapping("/save.do")
-    @ResponseBody
 private boolean save(Activity at, HttpServletRequest req){
         System.out.println("进入到市场添加操作");
         String id = UUIDUtil.getUUID();
@@ -50,7 +49,6 @@ private boolean save(Activity at, HttpServletRequest req){
         return flag;
 }
     @RequestMapping("/pageList.do")
-    @ResponseBody
     private PaginationVo<Activity> pageList(String name, String owner, String startDate,
                                             String endDate, @RequestParam("pageNo") String pageNoStr,
                                             @RequestParam("pageSize") String pageSizeStr){
@@ -72,7 +70,6 @@ private boolean save(Activity at, HttpServletRequest req){
     }
 
     @RequestMapping("/delete.do")
-    @ResponseBody
 private boolean delete(@RequestParam("id") String ids[]){
         System.out.println("进入到市场活动的删除操作");
         boolean flag=as.delete(ids);
@@ -81,14 +78,12 @@ private boolean delete(@RequestParam("id") String ids[]){
 
 
     @RequestMapping("/getUserListAndActivity.do")
-    @ResponseBody
     private Map<String, Object> getUserListAndActivity(String id){
         System.out.println("根据市场活动查询用户列表信息和根据市场活动查询单条记录的操作");
         Map<String,Object> map=as.getUserListAndActivity(id);
         return map;
     }
     @RequestMapping("/update.do")
-    @ResponseBody
     private boolean update(Activity at,HttpServletRequest request){
         System.out.println("进入到修改操作了");
         //       修改时间：当前系统时间
@@ -101,7 +96,6 @@ private boolean delete(@RequestParam("id") String ids[]){
         return flag;
     }
     @RequestMapping("/detail.do")
-    @ResponseBody
     private ModelAndView detail(String id){
         System.out.println("进入到查看详细页面操作");
         ModelAndView mv=new ModelAndView();
@@ -112,7 +106,6 @@ private boolean delete(@RequestParam("id") String ids[]){
     }
 
     @RequestMapping("/getRemarkListByAid.do")
-    @ResponseBody
     private List<ActivityRemark> getRemarkListByAid(@RequestParam("activityId") String id){
         System.out.println("根据市场活动id，取得备注信息列表");
         List<ActivityRemark> arList=as.getRemarkListByAid(id);
@@ -120,7 +113,6 @@ private boolean delete(@RequestParam("id") String ids[]){
     }
 
     @RequestMapping("/deleteRemark.do")
-    @ResponseBody
     private Boolean deleteRemark(String id){
         System.out.println("删除备注操作");
         boolean flag=as.deleteRemark(id);
@@ -128,7 +120,6 @@ private boolean delete(@RequestParam("id") String ids[]){
     }
 
     @RequestMapping("/saveRemark.do")
-    @ResponseBody
     private Map<String ,Object> saveRemark(ActivityRemark ar,HttpServletRequest request){
         System.out.println("执行备注添加操作");
         String id =UUIDUtil.getUUID();
@@ -146,7 +137,6 @@ private boolean delete(@RequestParam("id") String ids[]){
         return map;
     }
     @RequestMapping("/updateRemark.do")
-    @ResponseBody
     private Map<String ,Object> updateRemark(ActivityRemark ar,HttpServletRequest request){
         System.out.println("执行修改备注的操作");
         String editTime= DateTimeUtil.getSysTime();

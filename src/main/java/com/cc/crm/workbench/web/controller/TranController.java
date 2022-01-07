@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletContext;
@@ -20,7 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping("/transaction")
 public class TranController {
     @Autowired
@@ -31,7 +32,6 @@ public class TranController {
     private TranService ts;
 
     @RequestMapping("/add.do")
-    @ResponseBody
     private ModelAndView add(){
         System.out.println("进入到跳转交易添加页的操作");
         ModelAndView mv=new ModelAndView();
@@ -42,7 +42,6 @@ public class TranController {
     }
 
     @RequestMapping("/getCustomerName.do")
-    @ResponseBody
     private List<String> getCustomerName(String name){
         System.out.println("根据客户名称 取得列表（模糊查询）");
         List<String> sList = customerService.getCustomerName(name);
@@ -97,7 +96,6 @@ public class TranController {
      }
 
      @RequestMapping("/getHistoryListByTranId.do")
-    @ResponseBody
     private List<TranHistory> getHistoryListByTranId(String TranId,HttpServletRequest request){
 
          System.out.println("根据交易id取得相应的历史记录");
@@ -119,7 +117,6 @@ public class TranController {
      }
 
      @RequestMapping("/changeStage.do")
-    @ResponseBody
     private Map changeStage(HttpServletRequest request,Tran t){
          System.out.println("执行改变阶段的操作");
          String editTime = DateTimeUtil.getSysTime();

@@ -41,7 +41,7 @@ String basePath = request.getScheme() +
 		});
 		
 		
-		window.open("workbench/main/index.html","workareaFrame");
+		window.open("/workbench/main/index.html","workareaFrame");
 		
 	});
 	

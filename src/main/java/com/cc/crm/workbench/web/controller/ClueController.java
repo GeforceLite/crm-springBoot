@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -21,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping("/clue")
 public class ClueController{
     @Autowired
@@ -32,7 +33,6 @@ public class ClueController{
     private ActivityService as;
 
     @RequestMapping("/getUserList.do")
-    @ResponseBody
     private List<User> getUserList(){
         System.out.println("取得用户信息列表2");
         List<User> uList=us.getUserList();
@@ -40,7 +40,6 @@ public class ClueController{
     }
 
     @RequestMapping("/save.do")
-    @ResponseBody
     private boolean save(Clue clue, HttpServletRequest request){
         System.out.println("进入到线索添加操作");
         String id = UUIDUtil.getUUID();
@@ -53,7 +52,6 @@ public class ClueController{
         return flag;
     }
     @RequestMapping("/detail.do")
-    @ResponseBody
     private ModelAndView detail(String id){
         System.out.println("跳转到相信信息页");
         ModelAndView mv=new ModelAndView();
@@ -63,21 +61,18 @@ public class ClueController{
         return mv;
     }
     @RequestMapping("/getActivityListByClueId.do")
-    @ResponseBody
     private List<Activity> getActivityListByClueId(String clueId){
         System.out.println("根据id查询关联的市场活动列表");
         List<Activity> aList= as.getActivityListByClueId(clueId);
         return aList;
     }
     @RequestMapping("/unbund.do")
-    @ResponseBody
     private boolean unbund(String id){
         System.out.println("进入到解除关联操作");
         boolean flag=cs.unbund(id);
         return flag;
     }
     @RequestMapping("/getActivityListByNameAndNotByClueId.do")
-    @ResponseBody
     private List<Activity> getActivityListByNameAndNotByClueId(String aname,String clueId){
         System.out.println("进入到市场活动列表（根据市场模糊查询，排除掉已经关联指定线索的列表）");
         Map<String ,Object> map=new HashMap<>();
@@ -88,7 +83,6 @@ public class ClueController{
 
     }
     @RequestMapping("/bund.do")
-    @ResponseBody
     private boolean bund(String aid[],String cid){
         System.out.println("执行关联市场活动的操作");
         boolean flag=cs.bund(aid,cid);
@@ -97,7 +91,6 @@ public class ClueController{
 
 
     @RequestMapping("/getActivityListByName.do")
-    @ResponseBody
     private List<Activity> getActivityListByName(String aname){
         System.out.println("查询市场活动列表（根据名称模糊查）");
         List<Activity> aList=as.getActivityListByName(aname);
